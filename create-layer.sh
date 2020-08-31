@@ -12,10 +12,13 @@ cd ..
 rm -rf unixODBC-2.3.7 unixODBC-2.3.7.tar.gz
 
 # download and install ODBC driver for MSSQL 17
-# https://docs.microsoft.com/en-us/sql/connect/odbc/linux-mac/installing-the-microsoft-odbc-driver-for-sql-server?view=sql-server-2017
-curl https://packages.microsoft.com/config/rhel/6/prod.repo > /etc/yum.repos.d/mssql-release.repo
-yum install e2fsprogs.x86_64 0:1.43.5-2.43.amzn1 fuse-libs.x86_64 0:2.9.4-1.18.amzn1 libss.x86_64 0:1.43.5-2.43.amzn1
-ACCEPT_EULA=Y yum install msodbcsql17 --disablerepo=amzn*
+# https://docs.microsoft.com/en-us/sql/connect/odbc/linux-mac/installing-the-microsoft-odbc-driver-for-sql-server?view=sql-server-201
+sudo apt update
+sudo apt install curl gcc g++ gnupg unixodbc-dev libgssapi-krb5-2 -y
+sudo curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
+sudo curl https://packages.microsoft.com/config/debian/10/prod.list > /etc/apt/sources.list.d/mssql-release.list
+sudo apt update
+sudo ACCEPT_EULA=Y apt install -y msodbcsql17
 export CFLAGS="-I/opt/include"
 export LDFLAGS="-L/opt/lib"
 
