@@ -31,6 +31,7 @@ rm -rf /opt/microsoft/
 # https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html#configuration-layers-path
 mkdir /opt/python/
 cd /opt/python/
+pip install wheel -t .
 pip install pyodbc -t .
 
 cd /opt
